@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: mindbridge
+
+  jpa:
+    open-in-view: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+server:
+  servlet:
+    context-path: /mindbridge/api
