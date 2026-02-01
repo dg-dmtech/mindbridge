@@ -6,80 +6,9 @@
 </head>
 <body>
 <h1>Teste de Login (Keycloak)</h1>
-
-<button onclick="login()">Login</button>
-
 <pre id="result"></pre>
-
 <script>
-    const keycloakBase =
-        "http://localhost:8081/realms/mindbridge/protocol/openid-connect";
-    const clientId = "mindbridge-web";
-    const redirectUri = "http://localhost:8080/";
-
-    function login() {
-        window.location.href =
-            `${keycloakBase}/auth` +
-            `?client_id=${clientId}` +
-            `&response_type=code` +
-            `&scope=openid profile email` +
-            `&redirect_uri=${encodeURIComponent(redirectUri)}`;
-    }
-
-    async function exchangeCodeForToken(code) {
-        const body = new URLSearchParams({
-            grant_type: "authorization_code",
-            client_id: clientId,
-            code: code,
-            redirect_uri: redirectUri
-        });
-
-        const response = await fetch(
-            `${keycloakBase}/token`,
-            {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/x-www-form-urlencoded"
-                },
-                body: body.toString()
-            }
-        );
-
-        return response.json();
-    }
-
-    async function callHello(accessToken) {
-        const response = await fetch("/hello", {
-            headers: {
-                Authorization: "Bearer " + accessToken
-            }
-        });
-
-        const text = await response.text();
-        document.getElementById("result").innerText =
-            "Resposta de /hello:\n\n" + text;
-    }
-
-    // 🚀 Quando volta do Keycloak
-    const params = new URLSearchParams(window.location.search);
-    const code = params.get("code");
-
-    if (code) {
-        exchangeCodeForToken(code)
-            .then(tokenResponse => {
-                const accessToken = tokenResponse.access_token;
-
-                document.getElementById("result").innerText =
-                    "Access Token recebido (via code):\n\n" + accessToken;
-
-                return callHello(accessToken);
-            })
-            .catch(err => {
-                document.getElementById("result").innerText =
-                    "Erro ao trocar code por token:\n" + err;
-            });
-    }
 </script>
-
+    <h1>Bem vindo ao mindbridge</h1>
 </body>
 </html>
