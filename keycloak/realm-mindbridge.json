@@ -1,0 +1,46 @@
+{
+  "realm": "mindbridge",
+  "enabled": true,
+  "clients": [
+    {
+      "clientId": "mindbridge-api",
+      "enabled": true,
+      "protocol": "openid-connect",
+      "publicClient": false,
+      "bearerOnly": true
+    },
+    {
+      "clientId": "mindbridge-web",
+      "enabled": true,
+      "protocol": "openid-connect",
+
+      "publicClient": true,
+      "bearerOnly": false,
+
+      "standardFlowEnabled": true,
+      "implicitFlowEnabled": false,
+
+      "redirectUris": [
+        "http://localhost:8080/"
+      ],
+
+      "webOrigins": [
+        "http://localhost:8080"
+      ]
+    }
+
+  ],
+  "users": [
+    {
+      "username": "dev",
+      "enabled": true,
+      "credentials": [
+        {
+          "type": "password",
+          "value": "dev",
+          "temporary": false
+        }
+      ]
+    }
+  ]
+}
