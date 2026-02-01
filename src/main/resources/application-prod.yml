@@ -7,7 +7,12 @@ spring:
   jpa:
     hibernate:
       ddl-auto: validate
-
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${ISSUER_URI}
+          audience: mindbridge-api
 management:
   endpoints:
     web:
@@ -15,9 +20,3 @@ management:
         include: health,info
 server:
   port: ${PORT:8080}
-
-okta:
-  oauth2:
-    issuer: ${ISSUER_URI}
-    client-id: ${CLIENT_ID}
-    client-secret: ${CLIENT_SECRET}
